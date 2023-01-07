@@ -97,3 +97,30 @@ aside > ul > li a:hover {
     margin-top: 2rem;
     padding-top: 3rem;
 }
+/* TABLE STYLE */
+#inventory {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  #inventory td, #inventory th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #inventory tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #inventory tr:hover {background-color: #f4733b9a;}
+  
+  #inventory th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #5c898b;
+    color: white;
+  }
+
+/* PAGE TITLE */
+.page-title {
+    padding-bottom: 1rem
+}

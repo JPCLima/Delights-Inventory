@@ -10,11 +10,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'base.css' %}">
+    {% block stylefile %}{% endblock stylefile %}
   </head>
   <body>    
-    {% block body %}    
+
+    <div class="wrapper">
+      <aside>
+          <div class="logo">
+              <p><a href="{% url 'home' %}">Delights Inventory</a></p>
+          </div>
+        <ul>
+          <li><a href="{% url 'recipes' %}">Recipe</a></li>
+          <li><a href="{% url 'inventory' %}">Inventory</a></li>
+          <li><a href="{% url 'purchase' %}">Purchase</a></li>
+          <li><a href="{% url 'report' %}">Report</a></li>
+        </ul>
+      </aside>
+      <main>
+        <div class="wrapper_inner">
+          <ul class="navbar">
+              <li><a href="#">UserName</a></li>
+              <li><a href="#">Logout</a></li>
+          </ul>
+          <div class="content">
+          {% block content %}    
     
-    {% endblock %}
+          {% endblock %}         
+          
+        </div>
+      </main>
+    </div>
+  </div>
     <script src="" async defer></script>
   </body>
 </html>

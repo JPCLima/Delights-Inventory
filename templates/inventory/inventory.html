@@ -9,6 +9,12 @@
 
 <h2 class='page-title'>Inventory</h2>
 
+<form method="POST" class="form">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit"/>
+</form>
+
 <table id="inventory">
     <tr>
         <th>Ingridient</th>
@@ -18,10 +24,18 @@
     </tr>
     {% for ingredient in object_list %}
     <tr>
-        <td>{{ ingredient.name }}</td>
+        <td><a href="{{ ingredient.id }}">{{ ingredient.name }}</a></td>
         <td>{{ ingredient.quantity }}</td>
         <td>{{ ingredient.unit }}</td>
-        <td>{{ ingredient.price_unit }}</td>
+        <td class='delete'>
+            {{ ingredient.price_unit }} 
+            <form action="{% url 'delete_inventory' id=ingredient.id %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit">Delete</button>
+              </form>
+              
+              
     </tr>    
     {% endfor %}
    

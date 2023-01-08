@@ -104,6 +104,7 @@ aside > ul > li a:hover {
   }
   
   #inventory td, #inventory th {
+    font-size: 0.8rem;
     border: 1px solid #ddd;
     padding: 8px;
   }
@@ -124,3 +125,24 @@ aside > ul > li a:hover {
 .page-title {
     padding-bottom: 1rem
 }
+/* FORM */
+.form {
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2%;
+}
+
+@media (max-width: 1200px) {
+    .form {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+  }
+
+/* Delete Button */
+.delete {
+    display: flex;
+    justify-content: space-between;
+}
+

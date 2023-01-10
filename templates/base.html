@@ -8,6 +8,8 @@
     <title>Delights Inventory</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'base.css' %}">
     {% block stylefile %}{% endblock stylefile %}
@@ -42,6 +44,20 @@
     </div>
   </div>
   <script src="https://unpkg.com/phosphor-icons" async></script>
-    <script src="" async defer></script>
+  <script>
+    $(document).ready(function() {
+      $('#delete-button').click(function() {
+        var form = $('#delete-form');
+        $.ajax({
+          url: form.attr('action'),
+          type: 'DELETE',
+          data: form.serialize(),
+          success: function(result) {
+            // Handle successful delete
+          }
+        });
+      });
+    });
+  </script>
   </body>
 </html>

@@ -9,11 +9,7 @@
 
 <h2 class='page-title'>Inventory</h2>
 
-<form method="POST" class="form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
+
 
 <table id="inventory">
     <tr>
@@ -22,27 +18,15 @@
         <th>Unit</th>
         <th>Price Per Unit</th>
     </tr>
-    {% for ingredient in ingredients %}
+    {% for ingredient in object_list %}
     <tr>
-        <td><a href="{{ ingredient.id }}">{{ ingredient.name }}</a></td>
+        <td><a href="">{{ ingredient.name }}</a></td>
         <td>{{ ingredient.quantity }}</td>
         <td>{{ ingredient.unit }}</td>
-        <td class='delete'>
-            {{ ingredient.price_unit }} 
-            <form method="POST" class="form">
-                {% csrf_token %}
-                
-                {{ second_form_class }}
-             
-                <button type="submit" value={{ingredient.id}}>Delete</button>
-            </form>         
-             
-              
+        <td>{{ ingredient.price_unit }}</td>
     </tr>    
     {% endfor %}
    
 </table>
 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati beatae ipsa expedita error at. Fugit ad at est reprehenderit, eligendi quaerat quidem sequi ipsa cum maiores dignissimos illum architecto</p>
-
-
 {% endblock %}

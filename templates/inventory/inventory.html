@@ -11,7 +11,7 @@
 
 <form method="POST" class="form">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ formEdit.as_p }}
     <button type="submit">Submit</button>
 </form>
 
@@ -29,11 +29,8 @@
         <td>{{ ingredient.unit }}</td>
         <td class='delete'>
             {{ ingredient.price_unit }} 
-            <form method="POST" class="form">
-                {% csrf_token %}
-                
-                {{ second_form_class }}
-             
+            <form method="POST" class="form" action="{% url 'delete_item' ingredient.id %}">
+                {% csrf_token %}             
                 <button type="submit" value={{ingredient.id}}>Delete</button>
             </form>         
              
@@ -42,7 +39,11 @@
     {% endfor %}
    
 </table>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Obcaecati beatae ipsa expedita error at. Fugit ad at est reprehenderit, eligendi quaerat quidem sequi ipsa cum maiores dignissimos illum architecto</p>
+
+<div>
+    
+</div>
+<p class="footer">At our company, we are committed to sourcing the highest quality ingredients for our products. Our ingredients are carefully selected from local and organic farms to ensure that they meet our strict standards for taste and nutrition. We believe that using the freshest and most natural ingredients results in better-tasting and healthier products. We pride ourselves on our transparency and are happy to share the sources of our ingredients with our customers. Thank you for choosing our ingredients in your cooking, We hope you enjoy them as much as we do!</p>
 
 
 {% endblock %}

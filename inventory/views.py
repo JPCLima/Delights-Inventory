@@ -1,9 +1,8 @@
-from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from django.views.generic import TemplateView
 
-from .forms import DeleteForm, EditForm
+from .forms import EditForm
 from .models import Ingredient
 
 
@@ -11,6 +10,45 @@ class HomeView(TemplateView):
     template_name = 'inventory/home.html'
 
 
+def list_items(request):
+    """List items on the table"""
+    if request.method == 'POST':
+        form = EditForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory')
+    else:
+        items = Ingredient.objects.all()
+        context = {'ingredients': items,
+                   'formEdit': EditForm}
+        return render(request, 'inventory/inventory.html', context)
+
+
+def display_item(request, id):
+    """List items on the table"""
+    ingredient = get_object_or_404(Ingredient, pk=id)
+    if request.method == 'POST':
+        form = EditForm(request.POST, instance=ingredient)
+        if form.is_valid():
+            form.save()
+            return redirect('inventory')
+
+    else:
+        editform = EditForm(instance=ingredient)
+        items = Ingredient.objects.all()
+        context = {'ingredients': items,
+                   'formEdit': editform}
+        return render(request, 'inventory/inventory.html', context)
+
+
+def delete_item(request, id):
+    """Delete the selected item from the inventory"""
+    ingredient = get_object_or_404(Ingredient, pk=id)
+    ingredient.delete()
+    return redirect('inventory')
+
+
+"""
 class InventoryView(View):
     template_name = 'inventory/inventory.html'
     model = Ingredient
@@ -52,8 +90,8 @@ class InventoryView(View):
                 return redirect('inventory')
             else:
                 print(request.POST)
-                """ obj = self.model.objects.get(pk=id)
-                obj.delete() """
+                 obj = self.model.objects.get(pk=id)
+                obj.delete() 
                 return redirect('inventory')
 
         else:
@@ -64,6 +102,7 @@ class InventoryView(View):
             else:
                 print(request.POST)
                 return redirect('inventory')
+"""
 
 
 class RecipesView(TemplateView):

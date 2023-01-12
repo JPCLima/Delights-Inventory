@@ -10,7 +10,10 @@ urlpatterns = [
     path('inventory/delete/<int:id>', views.delete_item, name='delete_item'),
 
     # Recepes views
-    path('recipes/', views.RecipesView.as_view(), name='recipes'),
+    path('menu/', views.list_menu, name='menu'),
+    # path('recipes/<int:id>', views.display_recipe, name='display_item'),
+    # path('recipes/delete/<int:id>', views.delete_recipe, name='delete_item'),
+
 
     # Purchase views
     path('purchase/', views.PurchaseView.as_view(), name='purchase'),

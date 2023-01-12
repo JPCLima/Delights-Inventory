@@ -23,6 +23,7 @@ class Ingredient(models.Model):
 
 class MenuItem(models.Model):
     """Menu Item represents a entry menu in the restaurant"""
+    id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200, unique=True)
     price = models.FloatField(default=0.00)
 
@@ -30,12 +31,13 @@ class MenuItem(models.Model):
         return "/menu"
 
     def __str__(self):
-        return f"""{self.title} | {self.price}"""
+        return f"""{self.title}"""
 
 
 class RecipeManager(models.Model):
     """Represents a ingredients needed for a recipe"""
-    menu_items = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    menu_items = models.ForeignKey(
+        MenuItem, on_delete=models.CASCADE)
     ingredient = models.ManyToManyField(Ingredient)
     quantity = models.FloatField(default=0.0)
 
@@ -43,7 +45,7 @@ class RecipeManager(models.Model):
         return "/menu"
 
     def __str__(self):
-        return f"""{self.menu_items} | {self.quantity}"""
+        return f"""{self.menu_items} | Q:{self.quantity}"""
 
 
 class Purchase(models.Model):
@@ -55,8 +57,18 @@ class Purchase(models.Model):
         return "/purchases"
 
     def save(self, *args, **kwargs):
+        """ Subtract Recepi manager menus """
+        for ingredient in self.menu_item.ingredient.all():
+            ingredient.quantity -= 1
+            if ingredient.quantity >= 0:
+                ingredient.save()
+                self.menu_item.save()
+                super(Purchase, self).save(*args, **kwargs)
+            else:
+                assert ingredient.quantity > 0, f"{ingredient.name} quantity is insufficient."
+
         self.menu_item.quantity -= 1
-        if self.menu_item.quantity > 1:
+        if self.menu_item.quantity >= 0:
             self.menu_item.save()
             super().save(*args, **kwargs)
         else:

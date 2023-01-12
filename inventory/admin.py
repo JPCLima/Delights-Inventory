@@ -8,7 +8,7 @@ class IngridientsAdmin(admin.ModelAdmin):
 
 
 class MenuItemAdmin(admin.ModelAdmin):
-    list_display = ('title', 'price')
+    list_display = ('id','title', 'price')
 
 
 class RecipeManagerAdmin(admin.ModelAdmin):

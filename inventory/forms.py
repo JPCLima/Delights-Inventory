@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Ingredient, MenuItem
+from .models import Ingredient, MenuItem, Purchase
 
 
 class EditForm(forms.ModelForm):
@@ -13,3 +13,9 @@ class MenuForm(forms.ModelForm):
     class Meta(object):
         model = MenuItem
         fields = ("title", "price")
+
+
+class PurchaseForm(forms.ModelForm):
+    class Meta(object):
+        model = Purchase
+        fields = ("menu_item", "")

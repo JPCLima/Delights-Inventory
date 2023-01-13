@@ -45,13 +45,14 @@ class RecipeManager(models.Model):
         return "/menu"
 
     def __str__(self):
-        return f"""{self.menu_items} | Q:{self.quantity}"""
+        return f"""{self.menu_items}"""
 
 
 class Purchase(models.Model):
     """Represent the purchase of the menu"""
+    id = models.AutoField(primary_key=True)
     menu_item = models.ForeignKey(RecipeManager, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(auto_created=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
         return "/purchases"
@@ -75,4 +76,4 @@ class Purchase(models.Model):
             return False
 
     def __str__(self):
-        return f"""{self.menu_item} | {self.timestamp}"""
+        return f"""{self.menu_item}"""

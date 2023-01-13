@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<h2 class='page-title'>Purchase</h2>
+
+<form method="POST" class="form">
+    {% csrf_token %}
+    {{ formEdit.as_p }}
+    <button type="submit">Submit</button>
+</form>
+
+<table id="inventory">
+    <tr>
+        <th>Menu</th>
+        <th>Date</th>
+    </tr>
+    {% for p in purchases %}
+        <tr>
+            <td>             
+                <a href="{{ p.id }}">{{ p.menu_item }}</a>               
+            </td>   
+            <td class='delete'>         
+            {{ p.timestamp}}
+            <form method="POST" class="form" action="{% url 'delete_purchase' p.id %}">
+                {% csrf_token %}             
+                <button type="submit" value={{m.id}}>Delete</button>
+            </form>   
+        </td>   
+        </tr>    
+    {% endfor %}
+   
+</table>
+
+<div>
+    
+</div>
+<p class="footer">At our company, we are committed to sourcing the highest quality ingredients for our products. Our ingredients are carefully selected from local and organic farms to ensure that they meet our strict standards for taste and nutrition. We believe that using the freshest and most natural ingredients results in better-tasting and healthier products. We pride ourselves on our transparency and are happy to share the sources of our ingredients with our customers. Thank you for choosing our ingredients in your cooking, We hope you enjoy them as much as we do!</p>
+
+
+{% endblock %}

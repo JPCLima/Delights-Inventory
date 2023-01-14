@@ -18,4 +18,4 @@ class MenuForm(forms.ModelForm):
 class PurchaseForm(forms.ModelForm):
     class Meta(object):
         model = Purchase
-        fields = ("menu_item", "")
+        fields = ("menu_item",)

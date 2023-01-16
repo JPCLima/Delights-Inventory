@@ -32,9 +32,7 @@
             <form method="POST" class="form" action="{% url 'delete_item' ingredient.id %}">
                 {% csrf_token %}             
                 <button type="submit" value={{ingredient.id}}>Delete</button>
-            </form>         
-             
-              
+            </form>                    
     </tr>    
     {% endfor %}
    

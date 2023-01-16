@@ -88,6 +88,7 @@ def delete_menu(request, id):
 
 
 # PURCHASE VIEW
+
 def list_purchase(request):
     """ List the menu """
     if request.method == 'POST':

@@ -55,10 +55,10 @@ http://localhost:8000/
 Here are some screenshots that provide a visual preview of the Delights-Inventory project:
 
 Menu Page
-![](assets/screenshot_1.png)
+[](assets/Screenshot_1.png)
 
 Inventory Page
-![](assets/screenshot_2.png)
+![](assets/Screenshot_2.png)
 
 Purchased Page
-![](assets/screenshot_3.png)
+![](assets/Screenshot_3.png)
